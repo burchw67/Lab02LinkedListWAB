@@ -147,11 +147,15 @@ public class LinkedList<T>
             {
                 for(int i = 0; i <= pos; i++)
                 {
-                    if(i == pos - 1)
+                    if(i == pos-1)
                     {
                         tmp.next = tmp.next.next;
                         size--;
                         return true;
+                    }
+                    else
+                    {
+                        tmp = tmp.next;
                     }
                 }
             }
@@ -252,14 +256,13 @@ public class LinkedList<T>
 
 	public void clearList()
 	{
-		Node<T> ptr = head;
-		for(int i = 0; i <= size-1; i++)
-		{
-			ptr.data = null;
-
-		}
+        Node<T> ptr = head;
+        while (ptr != null) {
+            Node<T> temp = ptr;
+            ptr = ptr.next;
+            temp.next = null;
+        }
+        head = null;
+        size = 0;
 	}
-
-
-
 } // end of class

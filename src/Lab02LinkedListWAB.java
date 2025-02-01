@@ -22,7 +22,7 @@ public class Lab02LinkedListWAB
                             "13. Clear the contents of the Linked List\n" +
                             "14. Print the contents of the Linked List\n" +
                             "15. Quit\n\n" +
-                            "Enter Your Choice: ";
+                            "Enter Your Choice:";
         String quit = "N";
         String choice = "x";
         String charChoice;
@@ -33,7 +33,7 @@ public class Lab02LinkedListWAB
 
        Scanner inp = new Scanner(System.in); // Create scanner
 
-        while (quit.charAt(0) != 'Y')
+        while (quit.charAt(0) != 'Y' && quit.charAt(0) != 'y')
         {
             System.out.print(introString); // Print introduction string
             choice = inp.nextLine();
@@ -77,6 +77,7 @@ public class Lab02LinkedListWAB
                     if(labLL.isEmpty())
                     {
                         System.out.println("You cannot remove elements from an empty Linked List\n");
+                        break;
                     }
                     else
                     {
@@ -176,8 +177,16 @@ public class Lab02LinkedListWAB
                     }
                     else
                     {
-                        System.out.println("Data at position " + pos + " is: " + labLL.examineElementAtPos(pos) + "\n");
-                        System.out.println("It is succeeded by " + labLL.examineElementAtPos(pos + 1) + "\n" );
+                        if(pos == labLL.size - 1)
+                        {
+                            System.out.println("Data at position " + pos + " is: " + labLL.examineElementAtPos(pos) + "\n");
+                            System.out.println("It has no successor\n");
+                        }
+                        else
+                        {
+                            System.out.println("Data at position " + pos + " is: " + labLL.examineElementAtPos(pos) + "\n");
+                            System.out.println("It is succeeded by " + labLL.examineElementAtPos(pos + 1) + "\n" );
+                        }
                         break;
                     }
 
@@ -185,17 +194,44 @@ public class Lab02LinkedListWAB
                     if(labLL.isEmpty())
                     {
                         System.out.println("The list is empty!\n");
+                        break;
                     }
                     else
                     {
                         System.out.println("The list is not empty!\n");
+                        break;
                     }
 
                 case "12":
-                    System.out.print("The linked list is of size " + labLL.size);
+                    System.out.println("The linked list is of size " + labLL.size + "\n");
+                    break;
 
                 case "13":
+                    labLL.clearList();
+                    System.out.println("The linked list is cleared!\n");
+                    break;
 
+                case "14":
+                    labLL.PrintList();
+                    break;
+
+                case "15":
+                    System.out.print("Are you sure you want to quit? [Y/N]");
+                    quit = inp.nextLine();
+
+                    if(Character.toUpperCase(quit.charAt(0)) == 'N' || Character.toLowerCase(quit.charAt(0)) == 'n')
+                    {
+                        break;
+                    }
+                    else if(Character.toUpperCase(quit.charAt(0)) == 'Y' || Character.toLowerCase(quit.charAt(0)) == 'y')
+                    {
+                        quit = "yes";
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
             }
         }
 
