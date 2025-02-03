@@ -52,7 +52,7 @@ public class Lab02LinkedListWAB
                     }
                     else
                     {
-                        System.out.print(charChoice + "Inserted at head!\n");
+                        System.out.println(charChoice + " Inserted at head!\n");
                         labLL.insertAtHead(charChoice.charAt(0));
                         break;
                     }
@@ -68,7 +68,7 @@ public class Lab02LinkedListWAB
                     }
                     else
                     {
-                        System.out.print(charChoice + "Inserted at Tail!\n");
+                        System.out.println(charChoice + "Inserted at Tail!\n");
                         labLL.insertAtTail(charChoice.charAt(0));
                         break;
                     }
@@ -82,7 +82,7 @@ public class Lab02LinkedListWAB
                     else
                     {
                         System.out.println("Head removed from the Linked List\n");
-                        labLL.deleteHead();
+                        labLL.deleteAtHead();
                         break;
                     }
 
@@ -95,7 +95,7 @@ public class Lab02LinkedListWAB
                     else
                     {
                         System.out.println("Tail removed from the Linked List\n");
-                        labLL.deleteTail();
+                        labLL.deleteAtTail();
                         break;
                     }
 
@@ -234,11 +234,5 @@ public class Lab02LinkedListWAB
                     }
             }
         }
-
-
-
-
-
-
     }
 }

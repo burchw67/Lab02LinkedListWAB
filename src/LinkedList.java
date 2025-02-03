@@ -10,11 +10,6 @@ public class LinkedList<T>
 		size = 0;
 	}
 	
-	public int getSize()
-	{
-        return size;
-	}
-	
 	public void insertAtHead(T val)
 	{
 		Node<T> nPtr = new Node<T>(val, null);
@@ -50,8 +45,44 @@ public class LinkedList<T>
 		size++;
 	}
 	
-	public boolean insertAtPos(T val, int pos)
+	public boolean deleteAtHead()
 	{
+		if(head != null)
+		{
+			head = head.next;
+			size--;
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean deleteAtTail()
+	{
+		if(size == 0)
+			return false;
+		if(size == 1)
+		{
+			deleteAtHead();
+			return true;
+		}
+		Node<T> tmp = head;
+		while(tmp.next != null)
+		{
+			if(tmp.next.next == null)
+			{
+				tmp.next = null;
+				size--;
+				return true;
+			}
+			tmp = tmp.next;
+				
+		}
+		return false; // should never get here
+		
+	} // end of deleteTail
+
+    public boolean insertAtPos(T val, int pos)
+    {
         Node<T> nPtr = new Node<T>(val, null);
         Node<T> ptr = head;
         int posCount = 0;
@@ -80,43 +111,7 @@ public class LinkedList<T>
             }
         }
         return false;
-	}
-	
-	public boolean deleteHead()
-	{
-		if(head != null)
-		{
-			head = head.next;
-			size--;
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean deleteTail()
-	{
-		if(size == 0)
-			return false;
-		if(size == 1)
-		{
-			deleteHead();
-			return true;
-		}
-		Node<T> tmp = head;
-		while(tmp.next != null)
-		{
-			if(tmp.next.next == null)
-			{
-				tmp.next = null;
-				size--;
-				return true;
-			}
-			tmp = tmp.next;
-				
-		}
-		return false; // should never get here
-		
-	} // end of deleteTail
+    }
 	
 	public boolean deleteAtPos(int pos)
 	{
@@ -126,12 +121,12 @@ public class LinkedList<T>
         }
 		else if(pos == 0)
         {
-            deleteHead();
+            deleteAtHead();
             return true;
         }
         else if (pos == size - 1)
         {
-            deleteTail();
+            deleteAtTail();
             return true;
         }
         else
@@ -140,7 +135,7 @@ public class LinkedList<T>
 
             if(tmp.next.next == null)
             {
-                deleteTail();
+                deleteAtTail();
                 return true;
             }
             else
@@ -162,6 +157,47 @@ public class LinkedList<T>
         }
         return false;
 	}
+
+    public T examineElementAtPos(int pos)
+    {
+        if(head == null)
+        {
+            System.out.println("The list is empty!\n");
+        }
+        else
+        {
+            Node<T> ptr = head;
+            for(int i = 0; i <= pos; i++)
+            {
+                if(i == pos)
+                {
+                    return ptr.data;
+                }
+                else
+                {
+                    ptr = ptr.next;
+                }
+            }
+        }
+        return null;
+    }
+
+    public int getSize()
+    {
+        return size;
+    }
+
+    public boolean isEmpty()
+    {
+        if(size == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 	
 	public void PrintList()
 	{
@@ -182,9 +218,16 @@ public class LinkedList<T>
 		Node<T> ptr = head;
 		while(ptr != null)
 		{
-			System.out.print(ptr.data + " ");
-			ptr = ptr.next;
-			System.out.println();
+            if(ptr.next != null)
+            {
+                System.out.print(ptr.data + " -> ");
+                ptr = ptr.next;
+            }
+            else
+            {
+                System.out.print(ptr.data + "\n");
+                ptr = ptr.next;
+            }
 		} 
 	} // end of PrintList
 
@@ -215,42 +258,6 @@ public class LinkedList<T>
 			}
 
 			System.out.println("The character at the tail of the list is: " + ptr.data);
-		}
-	}
-
-	public T examineElementAtPos(int pos)
-	{
-		if(head == null)
-		{
-			System.out.println("The list is empty!\n");
-		}
-		else
-		{
-			Node<T> ptr = head;
-			for(int i = 0; i <= pos; i++)
-			{
-				if(i == pos)
-				{
-					return ptr.data;
-				}
-				else
-				{
-					ptr = ptr.next;
-				}
-			}
-		}
-		return null;
-	}
-
-	public boolean isEmpty()
-	{
-		if(size == 0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
 		}
 	}
 
