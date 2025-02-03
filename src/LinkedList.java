@@ -10,9 +10,9 @@ public class LinkedList<T>
 		size = 0;
 	}
 	
-	public void insertAtHead(T val)
+	public void insertAtHead(T data)
 	{
-		Node<T> nPtr = new Node<T>(val, null);
+		Node<T> nPtr = new Node<T>(data, null);
 		if(head == null)
 		{
 			head = nPtr;
@@ -25,9 +25,9 @@ public class LinkedList<T>
 		size++;
 	}
 	
-	public void insertAtTail(T val)
+	public void insertAtTail(T data)
 	{
-		Node<T> nPtr = new Node<T>(val, null);
+		Node<T> nPtr = new Node<T>(data, null);
 		Node<T> ptr = head;
 		if(head == null)
 		{
@@ -81,35 +81,52 @@ public class LinkedList<T>
 		
 	} // end of deleteTail
 
-    public boolean insertAtPos(T val, int pos)
+    public boolean insertAtPos(T data, int pos)
     {
-        Node<T> nPtr = new Node<T>(val, null);
+        Node<T> nPtr = new Node<T>(data, null);
         Node<T> ptr = head;
         int posCount = 0;
 
-        if(size == 0 || pos == 0)
+        if(pos < 0 || pos > size)
         {
-            insertAtHead(val);
-            return true;
+            System.out.println("Invalid position, try again\n");
         }
         else
         {
-            while(ptr.next != null)
+            if(size == 0 || pos == 0)
             {
-                if(posCount == pos - 1)
+                insertAtHead(data);
+                System.out.println(data +" inserted at position " + pos + "\n");
+                return true;
+            }
+            else
+            {
+                if(pos == size)
                 {
-                    nPtr.next = ptr.next;
-                    ptr.next = nPtr;
-                    size++;
+                    insertAtTail(data);
+                    System.out.println(data +" inserted at position " + pos + "\n");
                     return true;
                 }
-                else
+
+                while(ptr.next != null)
                 {
-                    ptr = ptr.next;
-                    posCount++;
+                    if(posCount == pos - 1)
+                    {
+                        nPtr.next = ptr.next;
+                        ptr.next = nPtr;
+                        size++;
+                        System.out.println(data +" inserted at position " + pos + "\n");
+                        return true;
+                    }
+                    else
+                    {
+                        ptr = ptr.next;
+                        posCount++;
+                    }
                 }
             }
         }
+
         return false;
     }
 	
@@ -182,6 +199,30 @@ public class LinkedList<T>
         return null;
     }
 
+    public int getPositionOfElement(T data)
+    {
+        if(head == null)
+        {
+            System.out.println("The list is empty!\n");
+        }
+        else
+        {
+            Node<T> ptr = head;
+            for(int i = 0; i <= size-1; i++)
+            {
+                if(ptr.data == data)
+                {
+                    return i;
+                }
+                else
+                {
+                    ptr = ptr.next;
+                }
+            }
+        }
+        return -1;
+    }
+
     public int getSize()
     {
         return size;
@@ -201,11 +242,9 @@ public class LinkedList<T>
 	
 	public void PrintList()
 	{
-		System.out.println("Singly Linked lIst = ");
-		System.out.println("Size = " + size);
 		if(size == 0)
 		{
-			System.out.println("Empty");
+			System.out.println("The list is empty!");
 			return;
 		}
 		
@@ -225,7 +264,7 @@ public class LinkedList<T>
             }
             else
             {
-                System.out.print(ptr.data + "\n");
+                System.out.println(ptr.data + "\n");
                 ptr = ptr.next;
             }
 		} 

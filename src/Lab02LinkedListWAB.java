@@ -27,7 +27,6 @@ public class Lab02LinkedListWAB
         String choice = "x";
         String charChoice;
         int pos = 0;
-        boolean x = false;
 
        LinkedList<Character> labLL = new LinkedList<Character>();
 
@@ -122,17 +121,8 @@ public class Lab02LinkedListWAB
                         System.out.print("Enter position to add " + charChoice + " to:");
                         pos = Integer.parseInt(inp.next());
 
-                        if(pos > labLL.size-1 || pos < 0)
-                        {
-                            System.out.println("Position cannot exceed Linked List size\n");
-                            break;
-                        }
-                        else
-                        {
-                            labLL.insertAtPos(charChoice.charAt(0), pos);
-                            System.out.print(charChoice.charAt(0) +" inserted at position " + pos + "\n");
-                            break;
-                        }
+                        labLL.insertAtPos(charChoice.charAt(0), pos);
+                        break;
                     }
 
                 case "8":
@@ -232,6 +222,9 @@ public class Lab02LinkedListWAB
                     {
                         break;
                     }
+
+                default:
+                    break;
             }
         }
     }
